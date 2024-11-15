@@ -38,7 +38,7 @@ def get_path(organizationId, requestId):
 
 def fetch_from_minio(object_path):
     minioClient = Minio(
-        "localhost:9000",
+        "localhost:9009",
         access_key="minioadmin",
         secret_key="minioadmin",
         secure=False

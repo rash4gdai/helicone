@@ -36,7 +36,7 @@ services:
     image: postgres:15.4
     restart: unless-stopped
     ports:
-      - 25432:5432/tcp
+      - 25432:5444/tcp
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: helicone
@@ -56,7 +56,7 @@ services:
     volumes:
       - ./valhalla/migrations:/flyway/sql:z
     environment:
-      - FLYWAY_URL=jdbc:postgresql://helicone-be-db:5432/helicone
+      - FLYWAY_URL=jdbc:postgresql://helicone-be-db:5444/helicone
       - FLYWAY_USER=postgres
       - FLYWAY_PASSWORD=password
       - FLYWAY_SCHEMAS=public
@@ -87,7 +87,7 @@ services:
       context: .
       dockerfile: ./web/dockerfile-local
     ports:
-      - 3000:3000
+      - 3020:3020
     volumes:
       - ./web:/usr/src/app:cached
 

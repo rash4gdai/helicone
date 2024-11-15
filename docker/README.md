@@ -5,12 +5,12 @@ cp .env.example .env
 docker compose up
 ```
 
-NOTE: To create a user go to http://localhost:54323/project/default/auth/users and add your account.
-You can use this account to sign into Helicone at localhost:3000 via your browser.
+NOTE: To create a user go to http://localhost:54443/project/default/auth/users and add your account.
+You can use this account to sign into Helicone at localhost:3020 via your browser.
 
 Default URLs:
 
-- Helicone Webpage: localhost:3000
+- Helicone Webpage: localhost:3020
 - Helicone OpenAI Proxy: localhost:8787
 - Helicone API: localhost:8788
 - Helicone GATEWAY: localhost:8790
@@ -39,7 +39,7 @@ Here is a helpful guide for getting started: [here](https://supabase.com/docs/gu
 docker stop helicone-dind
 docker rm helicone-dind
 docker build -t helicone-dind -f dockerfile-dind .
-docker run -d --privileged --name helicone-dind -p 3000:3000 -p 54321:54321 -p 54323:54323 -p 8787:8787 -p 8585:8585 helicone-dind
+docker run -d --privileged --name helicone-dind -p 3000:3020 -p 54321:54441 -p 54323:54443 -p 8787:8787 -p 8585:8585 helicone-dind
 # NOTE YOU MUST SLEEP OR WAIT FOR DIND SERVICE TO START
 docker exec -it helicone-dind docker compose up
 ```

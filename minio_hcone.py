@@ -22,7 +22,7 @@ def create_bucket_if_not_exists(minio_client, bucket_name):
 def start_minio(args):
     print('Starting MinIO server...')
     subprocess.run(f'''
-docker run -d -p {args.port}:9000 -p 9001:9001 --name {container_name} \
+docker run -d -p {args.port}:9009 -p 9001:9001 --name {container_name} \
   -e "MINIO_ROOT_USER={args.access_key}" \
   -e "MINIO_ROOT_PASSWORD={args.secret_key}" \
   -v {args.data_dir}:/data \

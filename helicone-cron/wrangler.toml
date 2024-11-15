@@ -12,4 +12,4 @@ name = "helicone-heartbeat-prod"
 [[env.production.hyperdrive]]
 binding = "HYPERDRIVE"
 id = "e5d49fcb7b0942e7b0ec8f4c27c322e7"
-localConnectionString = "postgresql://postgres:postgres@localhost:54322/postgres"
+localConnectionString = "postgresql://postgres:postgres@localhost:54442/postgres"

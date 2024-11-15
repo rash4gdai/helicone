@@ -48,24 +48,24 @@ Let's test it by running this command on your localhost
 
 ```bash
 ssh -N \
-  -L 3000:localhost:3000 \
+  -L 3000:localhost:3020 \
   -L 8989:localhost:8989 \
-  -L 8000:localhost:8000 \
+  -L 8000:localhost:8032 \
   -L 8787:localhost:8787 \
   -L 8788:localhost:8788 \
   helicone
 ```
 
-Now you can access the Helicone UI at http://localhost:3000
+Now you can access the Helicone UI at http://localhost:3020
 
 You can add users by going here: http://localhost:8989/project/default/auth/users
 and clicking "Add User".
 
-After you add a user, you can connect to the dashboard at http://localhost:3000/signin
+After you add a user, you can connect to the dashboard at http://localhost:3020/signin
 
 The proxy is setup at localhost:8787 for OpenAI.
 
-You can test it works by adding a new key on the http://localhost:3000 and then running this command on your localhost
+You can test it works by adding a new key on the http://localhost:3020 and then running this command on your localhost
 
 ```bash
 # Test command

@@ -30,7 +30,7 @@ Integrating Helicone with Open WebUI allows you to monitor and analyze interacti
 ```bash example
 export HELICONE_API_KEY=pk-<YOUR_API_KEY>
 
-docker run -d -p 9842:8080 -e OPENAI_API_BASE_URL="https://oai.helicone.ai/${HELICONE_API_KEY}/v1" -e OPENAI_API_KEY="sk-api_key" --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+docker run -d -p 9842:8089 -e OPENAI_API_BASE_URL="https://oai.helicone.ai/${HELICONE_API_KEY}/v1" -e OPENAI_API_KEY="sk-api_key" --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
 </CodeGroup>

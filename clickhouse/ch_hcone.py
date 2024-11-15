@@ -171,7 +171,7 @@ def main():
     if args.start:
         print('Starting services')
         res = subprocess.run(
-            f'docker run -d -p {args.port}:8123 -p19000:9000 --name {container_name} '
+            f'docker run -d -p {args.port}:8123 -p19000:9009 --name {container_name} '
             '--ulimit nofile=262144:262144 clickhouse/clickhouse-server',
             shell=True
         )
@@ -197,7 +197,7 @@ echo 'SELECT 1' | curl '{get_host(args.host)}:{args.port}/' --data-binary @-
         subprocess.run(f'docker stop {container_name}', shell=True)
         subprocess.run(f'docker rm {container_name}', shell=True)
         subprocess.run(
-            f'docker run -d -p {args.port}:8123 -p19000:9000 --name {container_name} '
+            f'docker run -d -p {args.port}:8123 -p19000:9009 --name {container_name} '
             '--ulimit nofile=262144:262144 clickhouse/clickhouse-server',
             shell=True
         )

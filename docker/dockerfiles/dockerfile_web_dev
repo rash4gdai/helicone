@@ -13,6 +13,6 @@ RUN find /app/web -name ".env.*" -exec rm {} \;
 
 RUN rm .env.* || true
 
-EXPOSE 3000
+EXPOSE 3020
 
 CMD ["yarn", "dev:local"]

@@ -6,6 +6,6 @@ COPY web/package.json web/yarn.lock ./
 
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 3020
 
 CMD [ "yarn", "dev"]

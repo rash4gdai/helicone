@@ -78,7 +78,7 @@ By default, the Helicone web service is exposed internally within the cluster. T
 kubectl port-forward svc/helicone-web 3000:80
 ```
 
-Now, you can access the Helicone web interface at `http://localhost:3000`.
+Now, you can access the Helicone web interface at `http://localhost:3020`.
 
 <Note>
   To create a user, you need to access the Supabase Auth dashboard. Set up port forwarding for the Supabase service:
@@ -87,13 +87,13 @@ Now, you can access the Helicone web interface at `http://localhost:3000`.
 kubectl port-forward svc/helicone-supabase 8989:8989
 ```
 
-Then, navigate to `http://localhost:8989/project/default/auth/users` in your browser and add your account. You can use this account to sign into Helicone at `http://localhost:3000`.
+Then, navigate to `http://localhost:8989/project/default/auth/users` in your browser and add your account. You can use this account to sign into Helicone at `http://localhost:3020`.
 
 </Note>
 
 **Default URLs:**
 
-- Helicone Web Interface: `http://localhost:3000`
+- Helicone Web Interface: `http://localhost:3020`
 - Helicone Worker: `http://localhost:8787`
 
 ## Configuration

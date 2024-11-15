@@ -16,24 +16,24 @@ services:
           "CMD",
           "node",
           "-e",
-          "require('http').get('http://localhost:3000/api/profile', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})",
+          "require('http').get('http://localhost:3020/api/profile', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})",
         ]
       timeout: 5s
       interval: 5s
       retries: 3
     ports:
-      - 54323:3000/tcp
+      - 54323:3020/tcp
     # depends_on:
     #   analytics:
     #     condition: service_healthy
     environment:
-      STUDIO_PG_META_URL: http://meta:8080
+      STUDIO_PG_META_URL: http://meta:8089
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
       DEFAULT_ORGANIZATION_NAME: ${STUDIO_DEFAULT_ORGANIZATION}
       DEFAULT_PROJECT_NAME: ${STUDIO_DEFAULT_PROJECT}
 
-      SUPABASE_URL: http://kong:8000
+      SUPABASE_URL: http://kong:8032
       SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
       SUPABASE_ANON_KEY: ${ANON_KEY}
       SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
@@ -53,7 +53,7 @@ services:
     # https://unix.stackexchange.com/a/294837
     entrypoint: bash -c 'eval "echo \"$$(cat ~/temp.yml)\"" > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
     ports:
-      - ${KONG_HTTP_PORT}:8000/tcp
+      - ${KONG_HTTP_PORT}:8032/tcp
       - ${KONG_HTTPS_PORT}:8443/tcp
     environment:
       KONG_DATABASE: "off"
@@ -166,7 +166,7 @@ services:
           "--no-verbose",
           "--tries=1",
           "--spider",
-          "http://localhost:5000/status",
+          "http://localhost:5020/status",
         ]
       timeout: 5s
       interval: 5s
@@ -175,7 +175,7 @@ services:
     environment:
       ANON_KEY: ${ANON_KEY}
       SERVICE_KEY: ${SERVICE_ROLE_KEY}
-      POSTGREST_URL: http://rest:3000
+      POSTGREST_URL: http://rest:3020
       PGRST_JWT_SECRET: ${JWT_SECRET}
       DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       FILE_SIZE_LIMIT: 52428800
@@ -268,7 +268,7 @@ services:
 
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 3020:3020
     environment:
       NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
       NEXT_PUBLIC_BASE_PATH: ${NEXT_PUBLIC_BASE_PATH}
@@ -344,7 +344,7 @@ services:
       CLICKHOUSE_USER: ${CLICKHOUSE_USER}
       CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
       VALHALLA_URL: http://jawn:${JAWN_PORT}
-      S3_ENDPOINT: http://minio:9000
+      S3_ENDPOINT: http://minio:9009
       S3_ACCESS_KEY: ${MINIO_ROOT_USER}
       S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
       S3_BUCKET_NAME: "request-response-storage"
@@ -422,11 +422,11 @@ services:
           "service_role_key": "${SERVICE_ROLE_KEY}"
         }
       SUPABASE_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-      S3_ENDPOINT: http://minio:9000
+      S3_ENDPOINT: http://minio:9009
       S3_ACCESS_KEY: ${MINIO_ROOT_USER}
       S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
       S3_BUCKET_NAME: "request-response-storage"
-      S3_ENDPOINT_PUBLIC: http://localhost:9000
+      S3_ENDPOINT_PUBLIC: http://localhost:9009
       CLICKHOUSE_CREDS: |
         {
           "CLICKHOUSE_HOST": "http://${CLICKHOUSE_HOST}:${CLICKHOUSE_PORT}",
@@ -439,7 +439,7 @@ services:
     image: minio/minio:latest
     restart: unless-stopped
     ports:
-      - 9000:9000
+      - 9000:9009
       - 9001:9001
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
@@ -451,7 +451,7 @@ services:
       /bin/sh -c "
       /usr/bin/docker-entrypoint.sh server /data --console-address ':9001' &
       sleep 5;
-      mc alias set myminio http://localhost:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
+      mc alias set myminio http://localhost:9009 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
       if ! mc ls myminio/request-response-storage; then
         mc mb myminio/request-response-storage;
       fi;
